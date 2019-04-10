@@ -5,7 +5,8 @@ import { WaitingRoomComponent } from '@pages/mobile/waiting-room/waiting-room.co
 import { FinalResultsComponent } from '@pages/mobile/final-results/final-results.component';
 
 export const ROUTES: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '',   redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
     { path: 'waiting', component: WaitingRoomComponent },
     { path: 'question', component: QuestionComponent },
     { path: 'final', component: FinalResultsComponent },

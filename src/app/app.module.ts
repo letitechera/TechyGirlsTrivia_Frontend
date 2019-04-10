@@ -9,6 +9,7 @@ import { QuestionComponent } from './pages/mobile/question/question.component';
 import { FinalResultsComponent } from './pages/mobile/final-results/final-results.component';
 import { RouterModule } from '@angular/router';
 import { ROUTES } from './app.routing';
+import { APP_BASE_HREF } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { ROUTES } from './app.routing';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: APP_BASE_HREF, useValue: '/' },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
