@@ -2,12 +2,17 @@
 
 ## Acuerdense de correr:
 npm install
+
 npm install -g @angular/cli
 
 ng serve `-> Para correr la app`
+
 ng serve --open `-> Para correr y abrir la app en web`
+
 ng g component [carpeta]/[nombre componente]  `-> Para crear un componente`
+
 ng g service services/[nombre servicio]  `-> Para crear un servicio`
+
 ng build --prod  `-> Para buildear a producción`
 
 ## Running unit tests
