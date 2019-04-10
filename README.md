@@ -18,4 +18,4 @@ ng g component [carpeta]/[nombre componente]  `-> Para crear un componente`
 
 ng g service services/[nombre servicio]  `-> Para crear un servicio`
 
-ng build --prod  `-> Para buildear a producción
+ng build --prod  `-> Para buildear a producción`
