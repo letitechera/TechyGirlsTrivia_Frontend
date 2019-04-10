@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SignalRService } from './services/signal-r.service';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '@environment';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent implements OnInit {
     this.startHttpRequest();
   }
   private startHttpRequest = () => {
-    this.http.get('http://localhost:60967/api/game')
+    this.http.get(`${environment.webApiUrl}/api/game`)
       .subscribe(res => {
         console.log(res);
       });

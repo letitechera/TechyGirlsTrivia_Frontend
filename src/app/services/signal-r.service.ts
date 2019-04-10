@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
 import { QuestionModel } from '../models/question';
+import { environment } from '@environment';
 
 @Injectable({
   providedIn: 'root'
@@ -8,10 +9,11 @@ import { QuestionModel } from '../models/question';
 export class SignalRService {
 
   public data: QuestionModel;
+  public broadcastedData: QuestionModel;
   private hubConnection: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('http://localhost:60967/game')
+      .withUrl(`${environment.webApiUrl}/game`)
       .build();
     this.hubConnection
       .start()
@@ -23,6 +25,17 @@ export class SignalRService {
     this.hubConnection.on('transferdata', (data) => {
       this.data = data;
       console.log(data);
+    });
+  }
+
+  public broadcastChartData = () => {
+    this.hubConnection.invoke('broadcastchartdata', this.data)
+    .catch(err => console.error(err));
+  }
+
+  public addBroadcastChartDataListener = () => {
+    this.hubConnection.on('broadcastchartdata', (data) => {
+      this.broadcastedData = data;
     });
   }
 
