@@ -1,3 +1,20 @@
-<p>
-  home works!
-</p>
+<form [formGroup]="sessionForm" (ngSubmit)="submitSession()">
+  <fieldset>
+    <mat-form-field>
+      <input matInput placeholder="Nombre" formControlName="ParticipantName" />
+      <mat-error *ngIf="locationsForm.get('ParticipantName').hasError('required') && this.submitted">
+        El nombre seleccionado ya existe
+      </mat-error>
+    </mat-form-field>
+  </fieldset>
+  <fieldset class="controls">
+    <div class="controls-container">
+      <button type="submit" class="ge-btn-default btn-accept">
+        <span *ngIf="!loading">Ingresar</span>
+        <!-- <span *ngIf="loading">
+          <fa name="spinner" animation="spin"></fa>
+        </span> -->
+      </button>
+    </div>
+  </fieldset>
+</form>
