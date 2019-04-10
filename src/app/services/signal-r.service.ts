@@ -10,6 +10,7 @@ export class SignalRService {
 
   public data: QuestionModel;
   public broadcastedData: QuestionModel;
+
   private hubConnection: signalR.HubConnection;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
@@ -21,20 +22,20 @@ export class SignalRService {
       .catch(err => console.log('Error while starting connection: ' + err));
   }
 
-  public addTransferDataListener = () => {
-    this.hubConnection.on('transferdata', (data) => {
+  public addGetTimerListener = () => {
+    this.hubConnection.on('getTimer', (data) => {
       this.data = data;
       console.log(data);
     });
   }
 
   public broadcastChartData = () => {
-    this.hubConnection.invoke('broadcastchartdata', this.data)
+    this.hubConnection.invoke('broadcastdata', this.data)
     .catch(err => console.error(err));
   }
 
   public addBroadcastChartDataListener = () => {
-    this.hubConnection.on('broadcastchartdata', (data) => {
+    this.hubConnection.on('broadcastdata', (data) => {
       this.broadcastedData = data;
     });
   }
