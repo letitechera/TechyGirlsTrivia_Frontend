@@ -1,6 +1,12 @@
 <form [formGroup]="sessionForm" (ngSubmit)="submitSession()">
   <fieldset>
     <mat-form-field>
+      <input matInput placeholder="Nombre" formControlName="ParticipantImg" type="file"/>
+      <mat-error *ngIf="locationsForm.get('ParticipantImg').hasError('required') && this.submitted">
+        El nombre seleccionado ya existe
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
       <input matInput placeholder="Nombre" formControlName="ParticipantName" />
       <mat-error *ngIf="locationsForm.get('ParticipantName').hasError('required') && this.submitted">
         El nombre seleccionado ya existe
