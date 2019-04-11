@@ -6,7 +6,7 @@
 
 npm install
 
-npm install -g @angular/cli
+Si saltan 'vulnerabilities' corer: 'npm audit fix'
 
 ## Comandos generales:
 
