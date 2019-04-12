@@ -29,6 +29,14 @@ export class SignalRService {
     });
   }
 
+  public addRegisterListener = () => {
+    this.hubConnection.on('registerUser', (data) => {
+      this.data = data;
+      console.log('service listener register');
+      console.log(data);
+    });
+  }
+
   public broadcastChartData = () => {
     this.hubConnection.invoke('broadcastdata', this.data)
     .catch(err => console.error(err));

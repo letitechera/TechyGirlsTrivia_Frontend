@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { environment } from '@environment';
 import { SignalRService } from '@services/signal-r.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -19,16 +18,21 @@ export class HomeComponent implements OnInit {
 
   constructor(
     public signalRService: SignalRService,
-    public storageApi: StorageService,
-    private http: HttpClient,
     private router: Router,
     private formBuilder: FormBuilder,
+    private http: HttpClient
   ) { }
 
   ngOnInit() {
     this.signalRService.startConnection();
-    this.signalRService.addGetTimerListener();
-    this.startHttpRequest();
+    this.signalRService.addRegisterListener();
+    this.userData = {
+      ParticipantId: 0,
+      ParticipantName: '',
+      ParticipantImg: '',
+      Points: 0,
+      Time: 0
+    };
     this.initForm();
   }
 
@@ -40,38 +44,38 @@ export class HomeComponent implements OnInit {
     this.loading = false;
   }
 
-  public submitUser() {
+  public submitSession() {
     this.submitted = true;
     if (!this.sessionForm.valid) {
       return;
     }
     this.loading = true;
-    this.addUser();
+    this.register();
   }
 
-  private addUser() {
+  private register() {
     this.setUserObject();
-    this.storageApi.postUser(this.userData).then((data: any[]) => {
-      this.navigateTo('waiting');
-    }, (err) => {
-      console.log(err);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
     });
+    const url = `${environment.webApiUrl}/api/game/register`;
+    return this.http.post(url, this.userData, { headers })
+      .subscribe(res => {
+        console.log('api call');
+        console.log(res);
+      });
   }
 
   private setUserObject() {
+    this.userData.ParticipantId = '';
     this.userData.ParticipantImg = this.sessionForm.get('ParticipantImg').value;
     this.userData.ParticipantName = this.sessionForm.get('ParticipantName').value;
+    this.userData.Points = 0;
+    this.userData.Time = 0;
   }
 
   public navigateTo(page) {
     this.router.navigateByUrl(page);
-  }
-
-  private startHttpRequest = () => {
-    this.http.get(`${environment.webApiUrl}/api/game`)
-      .subscribe(res => {
-        console.log(res);
-      });
   }
 
 }
