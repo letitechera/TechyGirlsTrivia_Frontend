@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '@environment';
 import { SignalRService } from '@services/signal-r.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   public loading: boolean;
   public sessionForm: FormGroup;
   public submitted: boolean;
+  public duplicateError: boolean;
   public userData: any;
 
   constructor(
@@ -61,8 +62,13 @@ export class HomeComponent implements OnInit {
     const url = `${environment.webApiUrl}/api/game/register`;
     return this.http.post(url, this.userData, { headers })
       .subscribe(res => {
-        console.log('api call');
-        console.log(res);
+        this.loading = false;
+        if (res == null) {
+          this.duplicateError = true;
+        }
+        else {
+          this.router.navigateByUrl('waiting');
+        }
       });
   }
 
@@ -72,6 +78,7 @@ export class HomeComponent implements OnInit {
     this.userData.ParticipantName = this.sessionForm.get('ParticipantName').value;
     this.userData.Points = 0;
     this.userData.Time = 0;
+    this.userData.GameId = localStorage.getItem('gameId');
   }
 
   public navigateTo(page) {

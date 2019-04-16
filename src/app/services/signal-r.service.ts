@@ -20,6 +20,7 @@ export class SignalRService {
       .start()
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
+      localStorage.setItem('gameId', 'newgame')
   }
 
   public addGetTimerListener = () => {

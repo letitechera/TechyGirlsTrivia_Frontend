@@ -10,9 +10,12 @@
         <mat-form-field>
           <input matInput placeholder="Nombre" formControlName="ParticipantName" />
           <mat-error *ngIf="sessionForm.get('ParticipantName').hasError('required') && this.submitted">
-            El nombre seleccionado ya existe
+            Escribe un nombre para ingresar
           </mat-error>
         </mat-form-field>
+        <div *ngIf="duplicateError">
+          El nombre seleccionado ya existe
+        </div>
       </div>
     </div>
   </fieldset>
@@ -20,9 +23,9 @@
     <div class="controls-container">
       <button type="submit" class="ge-btn-default btn-accept">
         <span *ngIf="!loading">Ingresar</span>
-        <!-- <span *ngIf="loading">
-          <fa name="spinner" animation="spin"></fa>
-        </span> -->
+        <span *ngIf="loading">
+          <div class="loader"></div>
+        </span>
       </button>
     </div>
   </fieldset>
