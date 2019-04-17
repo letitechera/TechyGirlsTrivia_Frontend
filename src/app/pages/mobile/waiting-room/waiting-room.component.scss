@@ -1,0 +1,24 @@
+@import "~styles/palette";
+
+.title-container {
+  position: relative;
+  margin: 100px 50px 74px;
+
+  .title-name-container {
+    font-family: NunitoSans;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: $simple-white;
+    text-align: center;
+    margin: 0px;
+
+    ::before {
+      background-image: url("../../../src/assets/group-6.png");
+      height: 50px;
+      width: 50px;
+      top: 0px;
+      left: 0px;
+    }
+  }
+}
