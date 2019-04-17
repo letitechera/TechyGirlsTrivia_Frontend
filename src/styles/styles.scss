@@ -1,13 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~styles/palette";
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+/* GENERAL STYLES */
+
+html, body{
+    background-color: $melon !important;
+    font-family: 'Nunito Sans', sans-serif;
 }
 
+::ng-deep .mat-form-field-underline {
+    // display: none !important;
+    background-color: red;
+}
+input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected{
+    background-color: transparent !important;
+}
+
+/* LOADER */
 $spinner-size: 30px;
 $spinner-border-width: 6px;
 $spinner-speed: 0.6s;
