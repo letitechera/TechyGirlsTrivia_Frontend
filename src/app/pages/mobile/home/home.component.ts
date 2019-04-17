@@ -29,17 +29,14 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private http: HttpClient
-  ) {
-    this.userImage = environment.defaultUserImage;
-    this.fileUrl = this.userImage;
-  }
+  ) { }
 
   ngOnInit() {
     this.formData = new FormData();
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
     this.userImage = environment.defaultUserImage;
-    this.fileUrl = this.userImage;
+    this.fileUrl = environment.uploadUserImage;
     this.userData = {
       ParticipantId: 0,
       ParticipantName: '',

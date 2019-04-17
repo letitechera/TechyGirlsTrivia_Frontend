@@ -15,6 +15,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ROUTES } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
 import { SignalRService } from '@services/signal-r.service';
+import { TimerComponent } from './pages/mobile/timer/timer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SignalRService } from '@services/signal-r.service';
     HomeComponent,
     WaitingRoomComponent,
     QuestionComponent,
-    FinalResultsComponent
+    FinalResultsComponent,
+    TimerComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { onSameUrlNavigation: 'reload' }),
