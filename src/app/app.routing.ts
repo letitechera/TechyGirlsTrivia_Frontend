@@ -7,6 +7,7 @@ import { WelcomeComponent } from '@pages/screen/welcome/welcome.component';
 import { WaitingComponent } from '@pages/screen/waiting/waiting.component';
 import { PublicQuestionComponent } from '@pages/screen/public-question/public-question.component';
 import { PodiumComponent } from '@pages/screen/podium/podium.component';
+import { TimerComponent } from '@pages/mobile/timer/timer.component';
 
 export const ROUTES: Routes = [
   /* MOBILE */ 
@@ -15,6 +16,7 @@ export const ROUTES: Routes = [
     { path: 'waiting', component: WaitingRoomComponent },
     { path: 'question', component: QuestionComponent },
     { path: 'final', component: FinalResultsComponent },
+    { path: 'timer', component: TimerComponent },
 
   /* SCREEN */ 
     { path: 'screen/welcome', component: WelcomeComponent },
