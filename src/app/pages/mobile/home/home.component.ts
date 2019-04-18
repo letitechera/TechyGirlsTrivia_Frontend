@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '@environment';
 import { SignalRService } from '@services/signal-r.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,9 +12,17 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   public loading: boolean;
+  public loadingfile = false;
   public sessionForm: FormGroup;
   public submitted: boolean;
+  public duplicateError: boolean;
   public userData: any;
+  public fileLoaded: boolean;
+  public fileName: string;
+  public fileUrl: string;
+  public userImage: string;
+  public formData: FormData;
+  private baseurl = `${environment.webApiUrl}/api/game/uploadimage`;
 
   constructor(
     public signalRService: SignalRService,
@@ -24,12 +32,15 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.formData = new FormData();
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
+    this.userImage = environment.defaultUserImage;
+    this.fileUrl = environment.uploadUserImage;
     this.userData = {
       ParticipantId: 0,
       ParticipantName: '',
-      ParticipantImg: '',
+      ParticipantImg: this.userImage,
       Points: 0,
       Time: 0
     };
@@ -61,17 +72,64 @@ export class HomeComponent implements OnInit {
     const url = `${environment.webApiUrl}/api/game/register`;
     return this.http.post(url, this.userData, { headers })
       .subscribe(res => {
-        console.log('api call');
-        console.log(res);
+        this.loading = false;
+        if (res == null) {
+          this.duplicateError = true;
+        }
+        else {
+          this.router.navigateByUrl('waiting');
+        }
       });
   }
 
   private setUserObject() {
     this.userData.ParticipantId = '';
-    this.userData.ParticipantImg = this.sessionForm.get('ParticipantImg').value;
+    this.userData.ParticipantImg = this.userImage;
     this.userData.ParticipantName = this.sessionForm.get('ParticipantName').value;
     this.userData.Points = 0;
     this.userData.Time = 0;
+    this.userData.GameId = localStorage.getItem('gameId');
+  }
+
+  /* FILE UPLOAD */
+  public uploadFile = (files, event) => {
+    this.loadingfile = true;
+    if (files.length === 0 || this.loading) {
+      this.fileLoaded = false;
+      return;
+    }
+    /* Preview */
+    if (event.target.files && event.target.files[0]) {
+      this.fileUrl = URL.createObjectURL(event.target.files[0]);
+    }
+    /* Upload */
+    const fileToUpload = <File>files[0];
+    this.formData.append('file', fileToUpload, fileToUpload.name);
+    this.fileLoaded = true;
+    this.saveFile();
+  }
+
+  public saveFile() {
+    if (!this.fileLoaded) {
+      return;
+    }
+    /* Store file */
+    this.http.post(`${this.baseurl}`, this.formData, { reportProgress: true, observe: 'events' })
+      .subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          let progress = Math.round(100 * event.loaded / event.total);
+          if (progress === 100) {
+            this.formData = new FormData();
+            this.fileLoaded = false;
+            this.loadingfile = false;
+          }
+        } else if (event.type === HttpEventType.Response) {
+          let body = event.body as any;
+          this.userImage = body.newFile;
+          console.log(this.userImage);
+          this.loadingfile = false;
+        }
+      });
   }
 
   public navigateTo(page) {

@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\pages",
+    "\\src\\app\\pages\\mobile",
+    "\\src\\app\\pages\\mobile\\home",
+    "\\src\\app\\pages\\mobile\\timer",
+    "\\src\\assets",
+    "\\src\\styles"
+  ],
+  "SelectedNode": "\\src\\environments",
+  "PreviewInSolutionExplorer": false
+}

@@ -1,0 +1,137 @@
+@import "~styles/palette";
+
+.home-wrapper {
+  padding-bottom: 90px;
+
+  .techy-logo {
+    background-image: url(/assets/techy-logo.jpg);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 75%;
+    height: 190px;
+    margin-top: 60px;
+  }
+
+  .onetree-logo {
+    background-image: url('/assets/onetree.png');
+    background-position: top center;
+    background-repeat: no-repeat;
+    height: 24px;
+  }
+
+  .welcome-banner {
+    height: 120px;
+    width: 100%;
+    font-size: 40px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-align: center;
+    color: $simple-white;
+    background-image: url(/assets/welcome.png);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: 90%;
+    line-height: 3;
+  }
+
+  form {
+    margin: 0 auto;
+    width: 375px;
+    text-align: center;
+  }
+}
+.name-input {
+  height: 48px;
+  width: 80%;
+  padding: 8px 10px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: $simple-white;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px white solid;
+  display: block;
+  margin: 0 auto;
+  margin-top: 16px;
+}
+.name-input:focus{
+    outline: none !important;
+}
+.name-input::placeholder {
+  color: $simple-white !important;
+  font-weight: 300;
+}
+fieldset.controls {
+  button {
+    width: 311px;
+    height: 64px;
+    opacity: 0.5;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    background-color: $simple-white;
+    border: none;
+    opacity: 0.5;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.33;
+    text-align: center;
+    color: $melon;
+    text-transform: uppercase;
+    margin: 40px 32px;
+  }
+}
+.duplicate-error{
+    display: block;
+    padding-left: 10px;
+    height: 32px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin: 0 32px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 2.29;
+    color: #eb0000;
+    text-align: left;
+}
+.img-box{
+    position: relative;
+}
+.file-btn-wrapper{
+    height: 128px;
+    width: 128px;
+    display: block;
+    cursor: pointer;
+    margin: 0 auto;
+}
+.center-cropped {
+    width: 100%;
+    height: 100%;
+    background-size: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: $burgundy;
+    margin: 0 auto;
+    border-radius: 100%;
+
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+.center-cropped:hover{
+    opacity: 0.7;
+    -o-transition:.5s;
+    -ms-transition:.5s;
+    -moz-transition:.5s;
+    -webkit-transition:.5s;
+    transition:.5s;
+}
+.backgroundloading{
+    opacity: 0.6;
+}
+.loader{
+    left: 47%;
+    top: 32%;
+}
