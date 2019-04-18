@@ -1,7 +1,11 @@
 <div class="home-wrapper">
-  <div class="techy-logo"></div>
-  <div class="onetree-logo"></div>
-  <div class="welcome-banner">¡Bienvenidas!</div>
+  <div class="home-header">
+      <img src="/assets/techy-logo.png" />
+      <img src="/assets/onetree.png" />
+      <div class="welcome-banner">
+        <span>¡Bienvenidas!</span>
+      </div>
+  </div>
   <form [formGroup]="sessionForm" (ngSubmit)="submitSession()">
     <fieldset>
       <div class="row">
@@ -18,21 +22,21 @@
             </a>
         </div>
         <div class="col-md-12">
-          <input matInput placeholder="Nombre" formControlName="ParticipantName" class="name-input" />
+          <input matInput placeholder="Nombre" formControlName="ParticipantName" class="name-input"/>
           <mat-error *ngIf="sessionForm.get('ParticipantName').hasError('required') && this.submitted"
-          class="duplicate-error">
+          class="input-error">
             Escribe un nombre para ingresar
           </mat-error>
-          <div *ngIf="duplicateError" class="duplicate-error">
+          <div *ngIf="duplicateError" class="input-error">
             El nombre seleccionado ya existe
           </div>
         </div>
       </div>
     </fieldset>
     <fieldset class="controls">
-      <button type="submit" class="ge-btn-default btn-accept">
+      <button type="submit" class="ge-btn-default btn-accept" [disabled]="!sessionForm.get('ParticipantName').value">
         <span *ngIf="!loading&&!loadingfile">INGRESAR</span>
-        <span *ngIf="loading||loadingfile">
+        <span *ngIf="loading||loadingfile"> 
           <div class="loader"></div>
         </span>
       </button>
