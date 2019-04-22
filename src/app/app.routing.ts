@@ -8,6 +8,7 @@ import { WaitingComponent } from '@pages/screen/waiting/waiting.component';
 import { PublicQuestionComponent } from '@pages/screen/public-question/public-question.component';
 import { PodiumComponent } from '@pages/screen/podium/podium.component';
 import { TimerComponent } from '@pages/mobile/timer/timer.component';
+import { AdminComponent } from '@pages/private/admin/admin.component';
 
 export const ROUTES: Routes = [
   /* MOBILE */ 
@@ -15,12 +16,18 @@ export const ROUTES: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'waiting', component: WaitingRoomComponent },
     { path: 'question', component: QuestionComponent },
+    // { path: 'question/:id', component: QuestionComponent },
     { path: 'final', component: FinalResultsComponent },
     { path: 'timer', component: TimerComponent },
 
   /* SCREEN */ 
     { path: 'screen/welcome', component: WelcomeComponent },
     { path: 'screen/waiting', component: WaitingComponent },
-    { path: 'screen/question/:id', component: PublicQuestionComponent },
+    { path: 'screen/question', component: PublicQuestionComponent },
+    // { path: 'screen/question/:id', component: PublicQuestionComponent },
     { path: 'screen/podium', component: PodiumComponent },
+
+  /* SCREEN */ 
+    { path: 'private/admin', component: AdminComponent },
+
   ];
