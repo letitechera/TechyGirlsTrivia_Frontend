@@ -7,47 +7,47 @@
 <!--Img of Question-->
 <div class="second-container-logo">
   <div class="container-logo-questions">
-    <img src="/assets/calendar.png" />
+    <img src="{{questionData.category.categoryLogo}}" />
   </div>
 </div>
 <!--Type of Question-->
 <div class="container-name-question">
-  <h1 class="title-question-type">Historia</h1>
+  <h1 class="title-question-type">{{questionData.category.categoryName}}</h1>
 </div>
 <!--The Question-->
 <div class="perfect-question-container">
   <div class="container-mid-question">
-    <h2 class="perfect-question">¿En qué año se fundó Peñarol?</h2>
+    <h2 class="perfect-question">{{questionData.questionText}}</h2>
   </div>
 </div>
 <!--Answers-->
 <!--Answer 1-->
-<div class="first-container-answers">
+<div *ngFor="let answer of answers" class="first-container-answers">
   <div class="the-container-button">
-    <div class="correct-answer">
+    <!-- <div class="correct-answer">
       <img src="assets/check-circle.png" class="img-correct-answer" />
-    </div>
-    <button class="container-button-answers">1891</button>
+    </div> -->
+    <button class="container-button-answers" value= {{answer.answerText}}  (click)='handleClick(answer.answerId)'>{{answer.answerText}}</button>
   </div>
 </div>
-<!--Answer 2-->
+<!-- Answer 2
 <div class="first-container-answers">
   <div class="the-container-button">
     <button class="container-button-answers incorrect-answer">1903</button>
   </div>
 </div>
-<!--Answer 3-->
+
 <div class="first-container-answers">
   <div class="the-container-button">
     <button class="container-button-answers incorrect-answer">1901</button>
   </div>
 </div>
-<!--Answer 4-->
+
 <div class="first-container-answers">
   <div class="the-container-button">
     <button class="container-button-answers incorrect-answer">¿Que es Peñarol?</button>
   </div>
-</div>
+</div> -->
 <!--Modal page-->
 <div class="all-modal-container">
   <div class="modal-container">

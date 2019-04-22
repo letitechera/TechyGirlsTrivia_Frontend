@@ -4,7 +4,7 @@
 
 export const environment = {
   // webApiUrl: 'http://localhost:60967', //leti - onetree
-  webApiUrl: 'http://localhost:64328', //leti - casa
+  webApiUrl: 'http://localhost:53450', //leti - casa
   uploadUserImage: 'https://triviadata.blob.core.windows.net/userimages/default-hover.png',
   defaultUserImage: 'https://triviadata.blob.core.windows.net/userimages/default.png',
   production: false

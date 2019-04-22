@@ -22,7 +22,7 @@
             </a>
         </div>
         <div class="col-md-12">
-          <input matInput placeholder="Nombre" formControlName="ParticipantName" class="name-input"/>
+     
           <mat-error *ngIf="sessionForm.get('ParticipantName').hasError('required') && this.submitted"
           class="input-error">
             Escribe un nombre para ingresar

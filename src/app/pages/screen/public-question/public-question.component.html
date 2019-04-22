@@ -1,3 +1,25 @@
-<p>
-  public-question works!
-</p>
+<span *ngIf="loading">
+  <div class="loader"></div>
+</span>
+<div *ngIf="questionData !=null && questionData.category!=null">
+  <div class="timer-container-top">
+    <div class="timer-question-container">
+      <span class="numbers-timer-question">20</span>
+    </div>
+  </div>
+  <div class="second-container-logo">
+    <div class="container-logo-questions">
+      <img src={{questionData.category.categoryLogo}} />
+    </div>
+  </div>
+
+  <div class="container-name-question">
+    <h1 class="title-question-type"> {{questionData.category.categoryName}}</h1>
+  </div>
+
+  <div class="perfect-question-container">
+    <div class="container-mid-question">
+      <h2 class="perfect-question"> {{questionData.questionText}}</h2>
+    </div>
+  </div>
+</div>

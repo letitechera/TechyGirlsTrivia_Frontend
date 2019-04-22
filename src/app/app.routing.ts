@@ -21,6 +21,6 @@ export const ROUTES: Routes = [
   /* SCREEN */ 
     { path: 'screen/welcome', component: WelcomeComponent },
     { path: 'screen/waiting', component: WaitingComponent },
-    { path: 'screen/question/:id', component: PublicQuestionComponent },
+    { path: 'screen/question', component: PublicQuestionComponent },
     { path: 'screen/podium', component: PodiumComponent },
   ];

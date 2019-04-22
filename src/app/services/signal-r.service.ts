@@ -10,8 +10,9 @@ export class SignalRService {
 
   public data: QuestionModel;
   public broadcastedData: QuestionModel;
-
+  public timer :number=0;
   private hubConnection: signalR.HubConnection;
+
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl(`${environment.webApiUrl}/game`)
@@ -25,8 +26,8 @@ export class SignalRService {
 
   public addGetTimerListener = () => {
     this.hubConnection.on('getTimer', (data) => {
-      this.data = data;
-      console.log(data);
+      this.timer = this.timer + data;
+      console.log('listener timer', this.timer);
     });
   }
 
@@ -38,6 +39,14 @@ export class SignalRService {
     });
   }
 
+public addGetQuestionListener=()=>{
+  this.hubConnection.on('sendquestion',(data)=>{
+    console.log('service listener sendQuestion');
+    this.data = data;
+    console.log('listener question', this.data);
+    
+  })
+}
   public broadcastChartData = () => {
     this.hubConnection.invoke('broadcastdata', this.data)
     .catch(err => console.error(err));
