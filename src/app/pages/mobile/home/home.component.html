@@ -30,6 +30,9 @@
           <div *ngIf="duplicateError" class="input-error">
             El nombre seleccionado ya existe
           </div>
+          <div *ngIf="error" class="input-error">
+            Error de conexión, intente actualizar la página
+          </div>
         </div>
       </div>
     </fieldset>

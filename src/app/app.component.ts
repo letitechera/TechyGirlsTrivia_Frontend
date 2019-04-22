@@ -13,14 +13,5 @@ export class AppComponent implements OnInit {
   constructor(public signalRService: SignalRService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    // this.signalRService.startConnection();
-    // this.signalRService.addGetTimerListener();
-    // this.startHttpRequest();
   }
-  // private startHttpRequest = () => {
-  //   this.http.get(`${environment.webApiUrl}/api/game`)
-  //     .subscribe(res => {
-  //       console.log(res);
-  //     });
-  // }
 }
