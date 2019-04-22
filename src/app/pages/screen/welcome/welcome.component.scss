@@ -1,0 +1,65 @@
+@import "~styles/palette";
+
+.screen-welcome-container {
+  .screen-img-container {
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 6%;
+  }
+
+  .screen-img-onetree {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    top: -22px;
+  }
+
+  .screen-welcome-title-container {
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    display: flex;
+    margin-top: 120px;
+    text-align: center;
+
+    .welcome-title {
+      font-size: 80px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: $simple-white;
+      position: relative;
+      margin: 0px;
+
+      &:before {
+        content: "";
+        position: absolute;
+        display: block;
+        background-image: url(/assets/group-6@2x.png);
+        height: 96px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        width: 96px;
+        top: -48px;
+        left: -82px;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: block;
+        background-image: url(/assets/group-6@2x.png);
+        height: 96px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        width: 96px;
+        top: 48px;
+        right: -86px;
+      }
+    }
+  }
+}

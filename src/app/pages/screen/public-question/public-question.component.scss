@@ -1,0 +1,116 @@
+@import "~styles/palette";
+
+.screen-public-container {
+  .screen-top-container {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 128px;
+    margin-top: 100px;
+
+    .screen-img-top {
+      height: 100%;
+    }
+
+    .screen-timer-question {
+      width: 128px;
+      position: absolute;
+      right: 112px;
+      height: 128px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+
+      .time-resposive {
+        color: $simple-white;
+        font-size: 64px;
+        text-align: center;
+        line-height: 1.83;
+        font-weight: 600;
+
+        &:before {
+          content: "";
+          position: absolute;
+          display: block;
+          background-image: url(/assets/combined-shape_2.png);
+          height: 128px;
+          background-repeat: no-repeat;
+          width: 128px;
+          top: 0px;
+          left: 0px;
+          background-size: contain;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          background-image: url(/assets/combined-shape.png);
+          height: 128px;
+          background-repeat: no-repeat;
+          width: 128px;
+          top: 0px;
+          left: 0px;
+          background-size: contain;
+        }
+      }
+    }
+  }
+
+  .screen-title-question {
+    height: 128px;
+    margin-top: 48px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+
+    .img-title-question {
+      height: 128px;
+      width: 128px;
+      position: relative;
+      margin-right: 32px;
+    }
+
+    .screen-name-title {
+      font-size: 56px;
+      font-weight: 600;
+      line-height: 0.86;
+      color: $simple-white;
+    }
+  }
+
+  .type-question-name {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+    margin-bottom: 100px;
+
+    .simple-question {
+      font-size: 40px;
+      font-weight: bold;
+      font-style: italic;
+      text-align: center;
+      line-height: 1.2;
+      color: $simple-white;
+      margin: 0px;
+    }
+  }
+
+  .screen-footer-question {
+    margin-top: 60px;
+    height: 85px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .img-footer-container {
+      width: 176px;
+      height: 32px;
+      margin-right: 64px;
+    }
+  }
+}

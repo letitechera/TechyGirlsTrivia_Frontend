@@ -1,0 +1,35 @@
+@import "~styles/palette";
+
+.screen-people-container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 160px;
+
+  .people-container {
+    width: 160px;
+    height: 100%;
+    position: relative;
+
+    .img-girl-container {
+      height: 96px;
+      width: 96px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      margin: auto;
+      margin-bottom: 16px;
+    }
+
+    .girl-name-container {
+      font-family: NunitoSans;
+      font-size: 24px;
+      font-weight: bold;
+      text-align: center;
+      color: $simple-white;
+      line-height: 1.33;
+      margin: 0px;
+    }
+  }
+}
