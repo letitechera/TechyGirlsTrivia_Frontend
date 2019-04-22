@@ -1,37 +1,61 @@
 @import "~styles/palette";
 
-.home-wrapper {
-  padding-bottom: 90px;
-
   .techy-logo {
-    background-image: url(/assets/techy-logo.jpg);
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: 75%;
-    height: 190px;
-    margin-top: 60px;
+    height: 270px;
+    text-align: center;
+    padding-top: 66px;
+    position: relative;
   }
 
   .onetree-logo {
-    background-image: url('/assets/onetree.png');
-    background-position: top center;
-    background-repeat: no-repeat;
     height: 24px;
+    text-align: center;
+    position: relative;
+    margin-bottom: 44px;
   }
 
-  .welcome-banner {
-    height: 120px;
-    width: 100%;
+.welcome-banner {
+  position: relative;
+  width: 380px;
+  justify-content: center;
+  align-items: center;
+  display: block;
+  margin: auto;
+  margin-bottom: 70px;
+
+  .welcome-banner-title {
     font-size: 40px;
+    margin: 0px;
     font-weight: 600;
     line-height: 1.2;
+    color: #fff;
     text-align: center;
     color: $simple-white;
-    background-image: url(/assets/welcome.png);
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: 90%;
-    line-height: 3;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 47px;
+      width: 47px;
+      top: -22px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      left: 16px;
+      background-image: url(/assets/group-6.png);
+      transform: rotate(180deg);
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      height: 47px;
+      width: 47px;
+      top: 24px;
+      background-repeat: no-repeat;
+      background-size: contain;
+      right: 14px;
+      background-image: url(/assets/group-6.png);
+    }
   }
 
   form {
@@ -46,7 +70,6 @@
   padding: 8px 10px;
   font-size: 20px;
   line-height: 1.6;
-  color: $simple-white;
   background-color: transparent;
   border: none;
   border-bottom: 1px white solid;
@@ -58,7 +81,7 @@
     outline: none !important;
 }
 .name-input::placeholder {
-  color: $simple-white !important;
+  color: $simple-pink !important;
   font-weight: 300;
 }
 fieldset.controls {
@@ -134,4 +157,12 @@ fieldset.controls {
 .loader{
     left: 47%;
     top: 32%;
+}
+
+.button-center-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }

@@ -1,0 +1,48 @@
+.container-top-medal {
+  height: 380px;
+  margin-top: 200px;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .container-medal {
+    background-image: url("/assets/medal.png");
+    height: 360px;
+    width: 279px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .mid-container-medal {
+      height: 208px;
+
+      .position-medal {
+        font-size: 128px;
+        font-weight: 900;
+        line-height: 1;
+        text-align: center;
+        color: #eb5444;
+        position: relative;
+      }
+    }
+  }
+}
+.container-title-medal {
+  height: 50px;
+  margin-top: 45px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+
+  .title-medal {
+    color: #ffffff;
+    line-height: 1;
+    font-size: 40px;
+    font-weight: 900;
+    font-style: italic;
+    margin: 0px;
+  }
+}
