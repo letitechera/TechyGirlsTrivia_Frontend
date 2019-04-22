@@ -18,9 +18,8 @@
     display: flex;
 
     .numbers-timer-question {
-      font-family: NunitoSans;
       font-size: 40px;
-      font-weight: 800;
+      font-weight: 600;
       line-height: 1.83;
       color: $simple-white;
     }
@@ -76,9 +75,8 @@
 
   .title-question-type {
     margin: 0px;
-    font-family: NunitoSans;
     font-size: 40px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 1.2;
     color: $simple-white;
   }
@@ -97,7 +95,6 @@
     position: relative;
 
     .perfect-question {
-      font-family: NunitoSans;
       font-size: 32px;
       font-weight: bold;
       font-style: italic;
@@ -125,9 +122,8 @@
       border-radius: 16px;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
       background-color: $simple-white;
-      font-family: NunitoSans;
       font-size: 24px;
-      font-weight: 800;
+      font-weight: 600;
       line-height: 1.33;
       text-align: center;
       color: $melon;
@@ -168,7 +164,7 @@
   .modal-container {
     height: 279px;
     width: 280px;
-    background-color: white;
+    background-color: $simple-white;
     border-radius: 8px;
 
     .img-modal-container {
@@ -188,12 +184,11 @@
       margin: auto;
 
       .text-in-modal {
-        font-family: NunitoSans;
         font-size: 20px;
         font-weight: bold;
         font-style: italic;
         text-align: center;
-        color: #eb5444;
+        color: $beautifull-red;
         line-height: 1.2;
       }
     }

@@ -11,9 +11,8 @@
   width: 300px;
 
   .title-name-container {
-    font-family: NunitoSans;
     font-size: 40px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 1.2;
     color: $simple-white;
     text-align: center;
@@ -29,8 +28,8 @@
       background-repeat: no-repeat;
       transform: rotate(180deg);
       width: 54px;
-      top: -24px;
-      left: -18px;
+      top: -28px;
+      left: -36px;
     }
 
     &::after {
@@ -42,8 +41,8 @@
       color: red;
       background-repeat: no-repeat;
       width: 54px;
-      top: 18px;
-      right: -18px;
+      top: 20px;
+      right: -36px;
     }
   }
 }
@@ -97,7 +96,7 @@
       position: relative;
       float: left;
       margin: 0px;
-      font-family: NunitoSans;
+      font-family: 'Nunito Sans';
       font-size: 24px;
       font-weight: bold;
       line-height: 1.33;
@@ -135,9 +134,8 @@
     height: 64px;
     border: none;
     opacity: 0.5;
-    font-family: NunitoSans;
     font-size: 24px;
-    font-weight: 800;
+    font-weight: 600;
     line-height: 1.33;
     color: #ff9f4f;
     text-transform: uppercase;
