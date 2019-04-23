@@ -1,3 +1,4 @@
+
   <div class="techy-logo">
     <img src="/assets/group-3.png" />
   </div>
@@ -23,13 +24,16 @@
             </a>
         </div>
         <div class="col-md-12">
-          <input matInput placeholder="Nombre" formControlName="ParticipantName" class="name-input" />
+          <input matInput placeholder="Nombre" formControlName="ParticipantName" class="name-input"/>
           <mat-error *ngIf="sessionForm.get('ParticipantName').hasError('required') && this.submitted"
-          class="duplicate-error">
+          class="input-error">
             Escribe un nombre para ingresar
           </mat-error>
-          <div *ngIf="duplicateError" class="duplicate-error">
+          <div *ngIf="duplicateError" class="input-error">
             El nombre seleccionado ya existe
+          </div>
+          <div *ngIf="error" class="input-error">
+            Error de conexión, intente actualizar la página
           </div>
         </div>
       </div>
