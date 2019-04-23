@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/94f891ee-d2c0-43ee-88f5-ffcb463ea4e5/resourceGroups/techygirls/providers/Microsoft.Web/sites/triviaot",
+    "appService.deploySubpath": "dist\\techygirlstrivia"
+}
