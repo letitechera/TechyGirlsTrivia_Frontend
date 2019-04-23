@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
     this.signalRService.addStartGameListener();
+    this.signalRService.addStartTimerListener();
     // this.signalRService.broadcastStartGame(false);
 
     this.formData = new FormData();

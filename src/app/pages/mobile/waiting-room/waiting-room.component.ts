@@ -10,7 +10,7 @@ import { ParticipantModel } from '@models/participant';
 })
 export class WaitingRoomComponent implements OnInit {
 
-  public participantsList: ParticipantModel[];
+  public participantsList: any[];
 
   constructor(
     public signalRService: SignalRService,
