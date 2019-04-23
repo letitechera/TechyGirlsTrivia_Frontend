@@ -1,0 +1,62 @@
+@import "~styles/palette";
+
+.screen-podium-container {
+  .screen-title-podium-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 80px;
+
+    .img-title-podium {
+      height: 128px;
+    }
+  }
+
+  .screen-podium-positions {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 600px;
+    margin-top: 100px;
+
+    .first-place-podium {
+      top: 300px;
+    }
+
+    .second-place-podium {
+      top: 350px;
+      left: 39%;
+    }
+
+    .third-place-podium {
+      top: 390px;
+      right: 40%;
+    }
+
+    .people-container {
+      position: absolute;
+
+      .img-girl-container {
+        height: 96px;
+        width: 96px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin: auto;
+        margin-bottom: 16px;
+      }
+
+      .girl-name-container {
+        font-family: NunitoSans;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: center;
+        color: $simple-white;
+        line-height: 1.33;
+        margin: 0px;
+      }
+    }
+  }
+}

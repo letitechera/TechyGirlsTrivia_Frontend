@@ -1,0 +1,88 @@
+@import "~styles/palette";
+
+.screen-waiting-container {
+  .screen-title-container {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-top: 80px;
+    margin-bottom: 100px;
+
+    .styles-img-waiting {
+      height: 128px;
+    }
+  }
+
+  .screen-timer-waiting {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .screen-timer-waiting-container {
+      width: 220px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      height: 220px;
+
+      .screen-timer-number {
+        font-size: 192px;
+        font-weight: 600;
+        color: #fff;
+        line-height: 1;
+        position: relative;
+        width: 220px;
+        height: 220px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &:before {
+          content: "";
+          position: absolute;
+          display: block;
+          background-image: url(/assets/combined-shape_2.png);
+          height: 220px;
+          background-position: center;
+          background-repeat: no-repeat;
+          width: 220px;
+          top: 0px;
+          left: 0px;
+          background-size: contain;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          display: block;
+          background-image: url(/assets/combined-shape.png);
+          height: 220px;
+          background-position: center;
+          background-repeat: no-repeat;
+          width: 220px;
+          top: 0px;
+          left: 0px;
+          background-size: contain;
+        }
+      }
+    }
+  }
+
+  .screen-footer-container {
+    bottom: 0px;
+    position: absolute;
+    height: 95px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    .screen-img-footer {
+      margin-right: 64px;
+      height: 32px;
+      width: 176px;
+      position: relative;
+    }
+  }
+}
