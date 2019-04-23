@@ -74,20 +74,17 @@ export class HomeComponent implements OnInit {
 
   private register() {
     this.setUserObject();
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    const headers = this.signalRService.getHeaders();
     const url = `${environment.webApiUrl}/api/game/register`;
     return this.http.post(url, this.userData, { headers })
       .subscribe((participant: ParticipantModel) => {
         this.loading = false;
         if (participant == null) {
           this.duplicateError = true;
-        }
-        else {
+        } else {
           console.log(participant);
           // this.storageService.setUserLocalVariables(participant);
-          this.router.navigateByUrl('waiting'); 
+          this.router.navigateByUrl('waiting');
         }
       },
         (err) => {
@@ -132,14 +129,14 @@ export class HomeComponent implements OnInit {
     this.http.post(`${this.baseurl}`, this.formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
-          let progress = Math.round(100 * event.loaded / event.total);
+          const progress = Math.round(100 * event.loaded / event.total);
           if (progress === 100) {
             this.formData = new FormData();
             this.fileLoaded = false;
             this.loadingfile = false;
           }
         } else if (event.type === HttpEventType.Response) {
-          let body = event.body as any;
+          const body = event.body as any;
           this.userImage = body.newFile;
           console.log(this.userImage);
           this.loadingfile = false;

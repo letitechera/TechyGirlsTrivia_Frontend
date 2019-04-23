@@ -17,12 +17,12 @@ export class TimerComponent implements OnInit {
     public signalRService: SignalRService,
     private router: Router,
     private http: HttpClient
-  ) { 
+  ) {
     this.getTimer();
 
     this.signalRService.timerValue$.subscribe(timer => {
       this.value = timer;
-      if (timer == -1) {
+      if (timer === -1) {
         this.router.navigateByUrl('question');
       }
     });
@@ -35,20 +35,14 @@ export class TimerComponent implements OnInit {
   }
 
   private getTimer() {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
-    });
+    const headers = this.signalRService.getHeaders();
     const url = `${environment.webApiUrl}/api/game/timer`;
     return this.http.get(url, { headers })
       .subscribe((data) => {
-          // this.router.navigateByUrl('waiting'); 
+        // this.router.navigateByUrl('waiting');
       },
         (err) => {
           console.log(err);
         });
   }
-  
-  
-
-
 }
