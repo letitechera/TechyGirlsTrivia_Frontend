@@ -4,6 +4,7 @@ import { QuestionModel } from '../models/question';
 import { environment } from '@environment';
 import { ParticipantModel } from '@models/participant';
 import { BehaviorSubject } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class SignalRService {
       .start()
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
-      localStorage.setItem('gameId', 'newgame')
+    localStorage.setItem('gameId', 'newgame')
   }
 
   /* LISTENERS */
@@ -64,8 +65,6 @@ export class SignalRService {
     this.hubConnection.on('startTimer', (data) => {
       this.startTimer --;
       this.timerValueSubject.next(this.startTimer);
-      console.log(this.startTimer);
-      
     });
   }
 
@@ -76,7 +75,16 @@ export class SignalRService {
     .catch(err => console.error(err));
   }
 
-  constructor() { 
+
+  public getHeaders() {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Credentials': 'true'
+    });
+    return headers;
+  }
+
+  constructor() {
     this.startTimer = 4;
   }
 }
