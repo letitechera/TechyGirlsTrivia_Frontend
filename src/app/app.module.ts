@@ -21,6 +21,8 @@ import { WaitingComponent } from './pages/screen/waiting/waiting.component';
 import { PodiumComponent } from './pages/screen/podium/podium.component';
 import { PublicQuestionComponent } from './pages/screen/public-question/public-question.component';
 import { UsersGirlsComponent } from './pages/screen/users-girls/users-girls.component';
+import { StorageService } from '@services/storage.service';
+import { AdminComponent } from './pages/private/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,10 @@ import { UsersGirlsComponent } from './pages/screen/users-girls/users-girls.comp
     WaitingComponent,
     PodiumComponent,
     PublicQuestionComponent,
+    Screen-page,
     UsersGirlsComponent,
+    AdminComponent,
+    master
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { onSameUrlNavigation: 'reload' }),
@@ -49,7 +54,8 @@ import { UsersGirlsComponent } from './pages/screen/users-girls/users-girls.comp
   ],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    SignalRService
+    SignalRService,
+    StorageService
   ],
   bootstrap: [AppComponent]
 })

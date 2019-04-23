@@ -4,6 +4,8 @@ import { environment } from '@environment';
 import { SignalRService } from '@services/signal-r.service';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ParticipantModel } from '@models/participant';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,7 @@ export class HomeComponent implements OnInit {
   public sessionForm: FormGroup;
   public submitted: boolean;
   public duplicateError: boolean;
+  public error: boolean;
   public userData: any;
   public fileLoaded: boolean;
   public fileName: string;
@@ -28,13 +31,18 @@ export class HomeComponent implements OnInit {
     public signalRService: SignalRService,
     private router: Router,
     private formBuilder: FormBuilder,
+    private storageService: StorageService,
     private http: HttpClient
   ) { }
 
   ngOnInit() {
-    this.formData = new FormData();
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
+    this.signalRService.addStartGameListener();
+    this.signalRService.addStartTimerListener();
+    // this.signalRService.broadcastStartGame(false);
+
+    this.formData = new FormData();
     this.userImage = environment.defaultUserImage;
     this.fileUrl = environment.uploadUserImage;
     this.userData = {
@@ -71,15 +79,22 @@ export class HomeComponent implements OnInit {
     });
     const url = `${environment.webApiUrl}/api/game/register`;
     return this.http.post(url, this.userData, { headers })
-      .subscribe(res => {
+      .subscribe((participant: ParticipantModel) => {
         this.loading = false;
-        if (res == null) {
+        if (participant == null) {
           this.duplicateError = true;
         }
         else {
-          this.router.navigateByUrl('waiting');
+          console.log(participant);
+          // this.storageService.setUserLocalVariables(participant);
+          this.router.navigateByUrl('waiting'); 
         }
-      });
+      },
+        (err) => {
+          console.log(err);
+          this.error = true;
+          this.loading = false;
+        });
   }
 
   private setUserObject() {
@@ -129,11 +144,16 @@ export class HomeComponent implements OnInit {
           console.log(this.userImage);
           this.loadingfile = false;
         }
-      });
+      },
+        (err) => {
+          console.log(err);
+          this.error = true;
+          this.loading = false;
+          this.fileLoaded = false;
+        });
   }
 
   public navigateTo(page) {
     this.router.navigateByUrl(page);
   }
-
 }

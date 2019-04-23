@@ -1,53 +1,26 @@
 <div class="title-container">
-  <p class="title-name-container">Sala de espera</p>
+    <p class="title-name-container">Sala de espera</p>
 </div>
 <div class="names-container">
-  <!--First component-->
-  <div class="first-container-names">
-    <div class="specific-name-container">
-      <div class="check-name-container">
-        <img src="/assets/check-copy-2.png" class="check-name" />
-      </div>
-      <h1 class="specific-name">Andreina</h1>
+    <!--Participant components-->
+    <div class="first-container-names" *ngFor="let participant of participantsList">
+        <div class="specific-name-container">
+            <div class="check-name-container">
+                <img src="/assets/check-copy-2.png" class="check-name" />
+            </div>
+            <h1 class="specific-name">{{participant.participantName}}</h1>
+        </div>
     </div>
-  </div>
-  <!--Second component-->
-  <div class="first-container-names">
-    <div class="specific-name-container">
-      <div class="check-name-container">
-        <img src="/assets/check-copy-2.png" class="check-name" />
-      </div>
-      <h1 class="specific-name">Ines</h1>
+    <!--Loader component-->
+    <div class="first-container-names">
+        <div class="specific-name-container">
+            <div class="check-name-loader">
+                <img src="/assets/check-copy-2.png" class="check-name" />
+            </div>
+            <img src="/assets/loading.gif" class="loading-img-container" />
+        </div>
     </div>
-  </div>
-  <!--Third component-->
-  <div class="first-container-names">
-    <div class="specific-name-container">
-      <div class="check-name-container">
-        <img src="/assets/check-copy-2.png" class="check-name" />
-      </div>
-      <h1 class="specific-name">Silvana</h1>
-    </div>
-  </div>
-  <!--Quarter component-->
-  <div class="first-container-names">
-    <div class="specific-name-container">
-      <div class="check-name-container">
-        <img src="/assets/check-copy-2.png" class="check-name" />
-      </div>
-      <h1 class="specific-name">Mavi</h1>
-    </div>
-  </div>
-  <!--Loader component-->
-  <div class="first-container-names">
-    <div class="specific-name-container">
-      <div class="check-name-loader">
-        <img src="/assets/check-copy-2.png" class="check-name" />
-      </div>
-      <img src="/assets/loading.gif" class="loading-img-container"/>
-    </div>
-  </div>  
 </div>
 <div class="button-start-container">
-  <button class="button-start-unselect button-start-select">Comenzar</button>
+    <button class="button-start-unselect button-start-select">Comenzar</button>
 </div>
