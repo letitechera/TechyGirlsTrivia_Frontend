@@ -114,9 +114,12 @@
 }
 
 .button-start-container {
-  position: absolute;
-  bottom: 0px;
+  position: relative;
   width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-top: 90px;
   margin-bottom: 96px;
 
   .button-start-select {
