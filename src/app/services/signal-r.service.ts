@@ -19,6 +19,11 @@ export class SignalRService {
   private startGameSubject = new BehaviorSubject<boolean>(null);
   public startGame$ = this.startGameSubject.asObservable();
 
+  private timerValueSubject = new BehaviorSubject<number>(null);
+  public timerValue$ = this.timerValueSubject.asObservable();
+
+  public startTimer: number;
+
   /* CONNECTION */
 
   private hubConnection: signalR.HubConnection;
@@ -55,6 +60,15 @@ export class SignalRService {
     });
   }
 
+  public addStartTimerListener = () => {
+    this.hubConnection.on('startTimer', (data) => {
+      this.startTimer --;
+      this.timerValueSubject.next(this.startTimer);
+      console.log(this.startTimer);
+      
+    });
+  }
+
   /* BROADCASTERS */
 
   public broadcastStartGame = (start) => {
@@ -62,5 +76,7 @@ export class SignalRService {
     .catch(err => console.error(err));
   }
 
-  constructor() { }
+  constructor() { 
+    this.startTimer = 4;
+  }
 }
