@@ -1,43 +1,7 @@
  <!--Container Girls-->
 <div class="screen-people-container">
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Andreina</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Ines</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Silvana</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Mavi</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Leticia</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Natalia</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Lucia</h1>
-  </div>
-  <!--One Girl-->
-  <div class="people-container">
-    <img src="/assets/example.png" class="img-girl-container" />
-    <h1 class="girl-name-container">Victoria</h1>
+  <div class="people-container" *ngFor="let girl of participantsList" >
+    <img src="{{girl.participantImg}}" class="img-girl-container" />
+    <h1 class="girl-name-container">{{girl.participantName}}</h1>
   </div>
 </div>

@@ -6,11 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/mobile/home/home.component';
 import { WaitingRoomComponent } from './pages/mobile/waiting-room/waiting-room.component';
-import { QuestionComponent } from './pages/mobile/question/question.component';
 import { FinalResultsComponent } from './pages/mobile/final-results/final-results.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
-import { MatDialogModule, MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material';
+import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ROUTES } from './app.routing';
 import { APP_BASE_HREF } from '@angular/common';
@@ -23,6 +22,8 @@ import { PublicQuestionComponent } from './pages/screen/public-question/public-q
 import { UsersGirlsComponent } from './pages/screen/users-girls/users-girls.component';
 import { StorageService } from '@services/storage.service';
 import { AdminComponent } from './pages/private/admin/admin.component';
+import { QuestionComponent } from '@pages/mobile/question/question.component';
+import { WaitingModalComponent } from './pages/mobile/question/waiting-modal/waiting-modal.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,14 @@ import { AdminComponent } from './pages/private/admin/admin.component';
     WaitingComponent,
     PodiumComponent,
     PublicQuestionComponent,
-    Screen-page,
+    // Screen-page,
     UsersGirlsComponent,
     AdminComponent,
-    master
+    WaitingModalComponent,
+    // master
+  ],
+  entryComponents: [
+    WaitingModalComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES, { onSameUrlNavigation: 'reload' }),

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { environment } from '@environment';
 import { SignalRService } from '@services/signal-r.service';
@@ -32,16 +32,15 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private storageService: StorageService,
-    private http: HttpClient
-  ) { }
-
-  ngOnInit() {
+    private http: HttpClient,
+    private zone: NgZone
+  ) { 
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
     this.signalRService.addStartGameListener();
-    this.signalRService.addStartTimerListener();
-    // this.signalRService.broadcastStartGame(false);
+  }
 
+  ngOnInit() {
     this.formData = new FormData();
     this.userImage = environment.defaultUserImage;
     this.fileUrl = environment.uploadUserImage;
@@ -82,9 +81,8 @@ export class HomeComponent implements OnInit {
         if (participant == null) {
           this.duplicateError = true;
         } else {
-          console.log(participant);
-          // this.storageService.setUserLocalVariables(participant);
-          this.router.navigateByUrl('waiting');
+          this.storageService.setUserLocalVariables(participant);
+          this.zone.run(() => this.router.navigateByUrl('waiting'));
         }
       },
         (err) => {

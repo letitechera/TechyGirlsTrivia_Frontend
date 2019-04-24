@@ -12,12 +12,7 @@ export class StorageService {
     localStorage.setItem('pImgUrl', participant.participantImg);
   }
 
-  public getUserInfo(){
-    const user = {
-      Id: localStorage.getItem('pId'),
-      Name: localStorage.getItem('pName'),
-      Img: localStorage.getItem('pImgUrl'),
-    }
-    return user;
+  public getUserId(){
+      return localStorage.getItem('pId');
   }
 }

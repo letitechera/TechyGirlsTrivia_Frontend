@@ -1,0 +1,43 @@
+@import "~styles/palette";
+.all-modal-container {
+    height: 100%;
+    width: 100%;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+
+    .modal-container {
+        height: 279px;
+        width: 280px;
+        background-color: $simple-white;
+        border-radius: 8px;
+
+        .img-modal-container {
+        height: 160px;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        }
+
+        .text-modal-container {
+        height: 72px;
+        width: 247px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+
+            .text-in-modal {
+                font-size: 20px;
+                font-weight: bold;
+                font-style: italic;
+                text-align: center;
+                color: $beautifull-red;
+                line-height: 1.2;
+            }
+        }
+    }
+}
+  

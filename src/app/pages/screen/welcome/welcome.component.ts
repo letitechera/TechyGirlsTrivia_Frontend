@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignalRService } from '@services/signal-r.service';
 
@@ -12,6 +12,7 @@ export class WelcomeComponent implements OnInit {
   constructor(
     public signalRService: SignalRService,
     private router: Router,
+    private zone: NgZone
   ) {
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
@@ -19,7 +20,7 @@ export class WelcomeComponent implements OnInit {
 
     this.signalRService.participants$.subscribe(participants => {
       if (participants && participants.length > 0) {
-        this.router.navigateByUrl('screen/waiting');
+        this.zone.run(() => this.router.navigateByUrl('screen/waiting'));
       }
     });
   }

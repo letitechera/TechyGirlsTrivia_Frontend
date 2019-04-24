@@ -5,6 +5,7 @@ import { environment } from '@environment';
 import { ParticipantModel } from '@models/participant';
 import { BehaviorSubject } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,8 @@ export class SignalRService {
   private startGameSubject = new BehaviorSubject<boolean>(null);
   public startGame$ = this.startGameSubject.asObservable();
 
-  private timerValueSubject = new BehaviorSubject<number>(null);
-  public timerValue$ = this.timerValueSubject.asObservable();
-
-  public startTimer: number;
+  private questionSubject = new BehaviorSubject<any>(null);
+  public question$ = this.questionSubject.asObservable();
 
   /* CONNECTION */
 
@@ -42,29 +41,30 @@ export class SignalRService {
   /* LISTENERS */
 
   public addGetTimerListener = () => {
+    this.checkConnection();
     this.hubConnection.on('getTimer', (data) => {
       // this.data = data;
     });
   }
 
   public addRegisterListener = () => {
-    console.log('service listener register');
+    this.checkConnection();
     this.hubConnection.on('registerUser', (data) => {
       this.participantsListSubject.next(data);
     });
   }
 
   public addStartGameListener = () => {
+    this.checkConnection();
     this.hubConnection.on('broadcastStart', (data) => {
-      console.log('Empieza el juego!!!! '+ data)
       this.startGameSubject.next(data);
     });
   }
 
-  public addStartTimerListener = () => {
-    this.hubConnection.on('startTimer', (data) => {
-      this.startTimer --;
-      this.timerValueSubject.next(this.startTimer);
+  public addQuestionsListener = () => {
+    this.checkConnection();
+    this.hubConnection.on('getQuestion', (data) => {
+      this.questionSubject.next(data);
     });
   }
 
@@ -75,6 +75,12 @@ export class SignalRService {
     .catch(err => console.error(err));
   }
 
+  public broadcastAnswer = (answer) => {
+    this.hubConnection.invoke('broadcastAnswer', answer)
+    .catch(err => console.error(err));
+  }
+
+  /* OTHER */
 
   public getHeaders() {
     const headers = new HttpHeaders({
@@ -84,7 +90,13 @@ export class SignalRService {
     return headers;
   }
 
-  constructor() {
-    this.startTimer = 4;
+  private checkConnection(){
+    if(!this.hubConnection){
+      this.router.navigateByUrl("home");
+    }
   }
+
+  constructor(
+    private router: Router,
+  ) {}
 }

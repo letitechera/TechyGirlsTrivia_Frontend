@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { SignalRService } from '@services/signal-r.service';
 import { Router } from '@angular/router';
 import { ParticipantModel } from '@models/participant';
@@ -15,9 +15,8 @@ export class WaitingRoomComponent implements OnInit {
   constructor(
     public signalRService: SignalRService,
     private router: Router,
+    private zone: NgZone
   ) { 
-    this.signalRService.startConnection();
-    this.signalRService.addRegisterListener();
     this.signalRService.addStartGameListener();
 
     this.signalRService.participants$.subscribe(participants => {
@@ -30,11 +29,11 @@ export class WaitingRoomComponent implements OnInit {
     
     this.signalRService.startGame$.subscribe(start => {
       if (start == true) {
-        this.router.navigateByUrl('timer');
+        ;
+        this.zone.run(() => this.router.navigateByUrl('timer'));
       }
     });
   }
-
   ngOnInit() {
   }
 }
