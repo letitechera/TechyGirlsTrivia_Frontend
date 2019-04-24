@@ -15,11 +15,10 @@ export class TimerComponent implements OnInit {
     private router: Router
   ) {
     const source = timer(1000, 1000);
-    const subscribe = source.subscribe(val =>{
+    const subscribe = source.subscribe(val => {
       this.value--;
-      if(this.value===-1){
+      if (this.value === -1) {
         subscribe.unsubscribe();
-        debugger;
         this.router.navigate(['question/', 1]);
       }
     });

@@ -10,15 +10,15 @@ export class AdminComponent implements OnInit {
 
   constructor(
     public signalRService: SignalRService,
-  ) { 
+  ) {
     this.signalRService.startConnection();
   }
 
   ngOnInit() {
   }
 
-  public startGame(){
-    console.log('Broadcast Start!')
+  public startGame() {
+    console.log('Broadcast Start!');
     this.signalRService.broadcastStartGame(true);
   }
 

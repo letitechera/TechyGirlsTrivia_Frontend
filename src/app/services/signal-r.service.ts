@@ -35,7 +35,7 @@ export class SignalRService {
       .start()
       .then(() => console.log('Connection started'))
       .catch(err => console.log('Error while starting connection: ' + err));
-    localStorage.setItem('gameId', 'newgame')
+    localStorage.setItem('gameId', 'newgame');
   }
 
   /* LISTENERS */
@@ -68,16 +68,23 @@ export class SignalRService {
     });
   }
 
+  public addAnswerListener = () => {
+    this.checkConnection();
+    this.hubConnection.on('broadcastAnswer', (data) => {
+      this.questionSubject.next(data);
+    });
+  }
+
   /* BROADCASTERS */
 
   public broadcastStartGame = (start) => {
     this.hubConnection.invoke('broadcastStart', start)
-    .catch(err => console.error(err));
+      .catch(err => console.error(err));
   }
 
   public broadcastAnswer = (answer) => {
-    this.hubConnection.invoke('broadcastAnswer', answer)
-    .catch(err => console.error(err));
+    this.hubConnection.invoke('BroadcastAnswer', answer)
+      .catch(err => console.error(err));
   }
 
   /* OTHER */
@@ -90,13 +97,13 @@ export class SignalRService {
     return headers;
   }
 
-  private checkConnection(){
-    if(!this.hubConnection){
-      this.router.navigateByUrl("home");
+  private checkConnection() {
+    if (!this.hubConnection) {
+      this.router.navigateByUrl('home');
     }
   }
 
   constructor(
     private router: Router,
-  ) {}
+  ) { }
 }

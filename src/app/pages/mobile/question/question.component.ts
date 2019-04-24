@@ -31,6 +31,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private zone: NgZone,
     private dialog: MatDialog
   ) {
+    this.signalRService.addAnswerListener();
     this.sumbitted = false;
     this.route.params.subscribe(params => {
       this.questionId = +params['id'];
@@ -60,7 +61,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
               this.subscribe.unsubscribe();
               this.zone.run(() => {
                 this.timer = 20;
-                this.router.navigate(['question/', questionId])
+                this.router.navigate(['question/', questionId]);
               });
             }
           });
@@ -71,30 +72,44 @@ export class QuestionComponent implements OnInit, OnDestroy {
         });
   }
 
-  public submitAnswer(answerId){
+  public submitAnswer(answerId) {
+    if (this.sumbitted === true) {
+      return;
+    }
     this.sumbitted = true;
+
+    let points = 0;
+    if (this.question.correctAnswerId === answerId) {
+      points = 2;
+    } else if (this.question.correctAnswerId !== answerId) {
+      points = -1;
+    }
+    const total = this.storageService.getScore(points);
+
+    const time = this.storageService.getTime(this.timer);
+
     const answer = {
       QuestionId: this.questionId,
       AnswerId: answerId,
       ParticipantId: this.storageService.getUserId(),
-      Time: this.timer
+      Time: time,
+      Score: total,
+      GameId: this.storageService.getGameId()
     };
     this.signalRService.broadcastAnswer(answer);
     this.openDialog();
   }
 
   public openDialog() {
-    const dialogRef = this.dialog.open(WaitingModalComponent, {
+    this.dialog.open(WaitingModalComponent, {
       height: '400px',
       width: '400px',
       hasBackdrop: true
     });
-    dialogRef.afterClosed().subscribe(result => {
-    });
   }
 
-  public isCorrect(answerId){
-    if(answerId == this.question.correctAnswerId){
+  public isCorrect(answerId) {
+    if (answerId === this.question.correctAnswerId) {
       return true;
     }
     return false;
