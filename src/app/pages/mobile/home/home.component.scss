@@ -103,22 +103,23 @@ fieldset.controls {
     }
   }
 }
-.input-error{
-    display: block;
-    position: absolute;
-    padding-left: 10px;
-    width: 311px;
-    border-radius: 4px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-    background-color: #ffffff;
-    margin: 0 32px;
-    font-size: 14px;
-    font-weight: 600;
-    line-height: 2.29;
-    color: red;
-    text-align: left;
+.input-error {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  width: 311px;
+  border-radius: 4px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin: auto;
+  line-height: 2.29;
+  text-align: left;
+  color: red;
 }
 .img-box{
     position: relative;
