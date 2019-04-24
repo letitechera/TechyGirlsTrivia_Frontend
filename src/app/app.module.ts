@@ -37,11 +37,9 @@ import { WaitingModalComponent } from './pages/mobile/question/waiting-modal/wai
     WaitingComponent,
     PodiumComponent,
     PublicQuestionComponent,
-    // Screen-page,
     UsersGirlsComponent,
     AdminComponent,
     WaitingModalComponent,
-    // master
   ],
   entryComponents: [
     WaitingModalComponent

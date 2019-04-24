@@ -32,20 +32,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private dialog: MatDialog
   ) {
     this.signalRService.addAnswerListener();
-    this.sumbitted = false;
     this.route.params.subscribe(params => {
       this.questionId = +params['id'];
       this.getQuestion(this.questionId);
     });
+    this.sumbitted = false;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.sumbitted = false;
+  }
 
   ngOnDestroy(): void {
     this.subscribe.unsubscribe();
   }
 
   public getQuestion(questionId) {
+    this.sumbitted = false;
     const headers = this.signalRService.getHeaders();
     const url = `${environment.webApiUrl}/api/game/question/${questionId}`;
     return this.http.get(url, { headers })
@@ -73,6 +76,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   public submitAnswer(answerId) {
+    debugger;
     if (this.sumbitted === true) {
       return;
     }
