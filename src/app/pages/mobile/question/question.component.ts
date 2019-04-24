@@ -33,7 +33,7 @@ export class QuestionComponent implements OnInit, OnDestroy {
   ) {
     this.signalRService.addAnswerListener();
     this.route.params.subscribe(params => {
-      this.questionId = +params['id'];
+      this.questionId = +params.id;
       this.getQuestion(this.questionId);
     });
     this.sumbitted = false;
@@ -64,7 +64,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
               this.subscribe.unsubscribe();
               this.zone.run(() => {
                 this.timer = 20;
-                this.router.navigate(['question/', questionId]);
+                this.dialog.closeAll();
+                if (questionId === 20) {
+                  this.router.navigateByUrl('final');
+                } else {
+                  this.router.navigate(['question/', questionId]);
+                }
               });
             }
           });
@@ -76,7 +81,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
   }
 
   public submitAnswer(answerId) {
-    debugger;
     if (this.sumbitted === true) {
       return;
     }
@@ -108,7 +112,8 @@ export class QuestionComponent implements OnInit, OnDestroy {
     this.dialog.open(WaitingModalComponent, {
       height: '400px',
       width: '400px',
-      hasBackdrop: true
+      hasBackdrop: true,
+      disableClose: true
     });
   }
 

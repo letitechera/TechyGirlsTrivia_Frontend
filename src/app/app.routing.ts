@@ -19,14 +19,13 @@ export const ROUTES: Routes = [
     { path: 'final', component: FinalResultsComponent },
     { path: 'timer', component: TimerComponent },
 
-  /* SCREEN */ 
+  /* SCREEN */
     { path: 'screen/welcome', component: WelcomeComponent },
     { path: 'screen/waiting', component: WaitingComponent },
-    { path: 'screen/question', component: PublicQuestionComponent },
-    // { path: 'screen/question/:id', component: PublicQuestionComponent },
+    { path: 'screen/question/:id', component: PublicQuestionComponent },
     { path: 'screen/podium', component: PodiumComponent },
 
-  /* SCREEN */ 
+  /* SCREEN */
     { path: 'private/admin', component: AdminComponent },
 
   ];

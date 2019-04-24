@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { timer } from 'rxjs/internal/observable/timer';
 
@@ -12,14 +12,18 @@ export class TimerComponent implements OnInit {
   public value = 3;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private zone: NgZone
+
   ) {
     const source = timer(1000, 1000);
     const subscribe = source.subscribe(val => {
       this.value--;
       if (this.value === -1) {
         subscribe.unsubscribe();
-        this.router.navigate(['question/', 1]);
+        this.zone.run(() => {
+          this.router.navigate(['question/', 1]);
+        });
       }
     });
   }

@@ -4,8 +4,8 @@
   </div>
   <!--Timer Dsiplay-->
   <div class="screen-timer-waiting">
-    <div class="screen-timer-waiting-container">
-      <span class="screen-timer-number">8</span>
+    <div class="screen-timer-waiting-container" *ngIf="startGame">
+      <span class="screen-timer-number">{{timer}}</span>
     </div>
   </div>
   <app-users-girls></app-users-girls>
