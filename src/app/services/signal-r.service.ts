@@ -43,7 +43,6 @@ export class SignalRService {
   public addGetTimerListener = () => {
     this.checkConnection();
     this.hubConnection.on('getTimer', (data) => {
-      // this.data = data;
     });
   }
 
@@ -56,7 +55,7 @@ export class SignalRService {
 
   public addStartGameListener = () => {
     this.checkConnection();
-    this.hubConnection.on('broadcastStart', (data) => {
+    this.hubConnection.on('startGame', (data) => {
       this.startGameSubject.next(data);
     });
   }
@@ -70,7 +69,7 @@ export class SignalRService {
 
   public addAnswerListener = () => {
     this.checkConnection();
-    this.hubConnection.on('broadcastAnswer', (data) => {
+    this.hubConnection.on('setAnswer', (data) => {
       this.questionSubject.next(data);
     });
   }
@@ -78,12 +77,12 @@ export class SignalRService {
   /* BROADCASTERS */
 
   public broadcastStartGame = (start) => {
-    this.hubConnection.invoke('broadcastStart', start)
+    this.hubConnection.invoke('startGame', start)
       .catch(err => console.error(err));
   }
 
   public broadcastAnswer = (answer) => {
-    this.hubConnection.invoke('BroadcastAnswer', answer)
+    this.hubConnection.invoke('setAnswer', answer)
       .catch(err => console.error(err));
   }
 
