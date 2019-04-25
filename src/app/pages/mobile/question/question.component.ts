@@ -31,7 +31,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private zone: NgZone,
     private dialog: MatDialog
   ) {
-    this.signalRService.addAnswerListener();
     this.route.params.subscribe(params => {
       this.questionId = +params.id;
       this.getQuestion(this.questionId);

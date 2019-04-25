@@ -15,47 +15,46 @@
   }
 
   .screen-podium-positions {
+    position: relative;
     justify-content: center;
     align-items: center;
     display: flex;
     height: 600px;
     margin-top: 100px;
 
-    .first-place-podium {
-      top: 300px;
-    }
-
-    .second-place-podium {
-      top: 350px;
-      left: 39%;
-    }
-
-    .third-place-podium {
-      top: 390px;
-      right: 40%;
-    }
-
     .people-container {
       position: absolute;
+      top: -15px;
 
-      .img-girl-container {
-        height: 96px;
-        width: 96px;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        margin: auto;
-        margin-bottom: 16px;
+      div{
+        float: left;
+        margin: 0 35px;
+
+        .img-girl-container {
+          height: 96px;
+          width: 96px;
+          justify-content: center;
+          align-items: center;
+          display: flex;
+          margin: auto;
+          margin-bottom: 16px;
+        }
+  
+        .girl-name-container {
+          font-size: 24px;
+          text-align: center;
+          color: $simple-white;
+          line-height: 1.33;
+          margin: 0px;
+        }
       }
-
-      .girl-name-container {
-        font-family: NunitoSans;
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-        color: $simple-white;
-        line-height: 1.33;
-        margin: 0px;
+  
+      .second-place-podium {
+        margin-top: 42px;
+      }
+  
+      .third-place-podium {
+        margin-top: 85px;
       }
     }
   }

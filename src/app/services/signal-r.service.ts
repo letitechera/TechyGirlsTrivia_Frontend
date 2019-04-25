@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { QuestionModel } from '../models/question';
 import { environment } from '@environment';
 import { ParticipantModel } from '@models/participant';
 import { BehaviorSubject } from 'rxjs';
@@ -24,6 +23,9 @@ export class SignalRService {
   private questionSubject = new BehaviorSubject<any>(null);
   public question$ = this.questionSubject.asObservable();
 
+  private winnersSubject = new BehaviorSubject<any[]>(null);
+  public winners$ = this.winnersSubject.asObservable();
+
   /* CONNECTION */
 
   private hubConnection: signalR.HubConnection;
@@ -39,12 +41,6 @@ export class SignalRService {
   }
 
   /* LISTENERS */
-
-  public addGetTimerListener = () => {
-    this.checkConnection();
-    this.hubConnection.on('getTimer', (data) => {
-    });
-  }
 
   public addRegisterListener = () => {
     this.checkConnection();
@@ -67,14 +63,19 @@ export class SignalRService {
     });
   }
 
-  public addAnswerListener = () => {
+  public addResultsListener = () => {
     this.checkConnection();
-    this.hubConnection.on('setAnswer', (data) => {
-      this.questionSubject.next(data);
+    this.hubConnection.on('finalResults', (data) => {
+      this.winnersSubject.next(data);
     });
   }
 
   /* BROADCASTERS */
+
+  public broadcastRegister = (user) => {
+    this.hubConnection.invoke('registerUser', user)
+      .catch(err => console.error(err));
+  }
 
   public broadcastStartGame = (start) => {
     this.hubConnection.invoke('startGame', start)
@@ -83,6 +84,11 @@ export class SignalRService {
 
   public broadcastAnswer = (answer) => {
     this.hubConnection.invoke('setAnswer', answer)
+      .catch(err => console.error(err));
+  }
+
+  public broadcastFinalResults = (gameId) => {
+    this.hubConnection.invoke('finalResults', gameId)
       .catch(err => console.error(err));
   }
 

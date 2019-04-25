@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SignalRService } from '@services/signal-r.service';
+import { StorageService } from '@services/storage.service';
 
 @Component({
   selector: 'app-podium',
@@ -7,8 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PodiumComponent implements OnInit {
 
-  constructor() { }
+  public winners: any[];
 
+  constructor(
+    public signalRService: SignalRService,
+    public storageService: StorageService,
+  ) { 
+    const gameid = this.storageService.getGameId();
+    this.signalRService.broadcastFinalResults(gameid);
+    this.signalRService.winners$.subscribe(winners => {
+      if (winners && winners.length > 0) {
+        this.winners = winners;
+        console.log(this.winners);
+      }
+    });
+  }
   ngOnInit() {
   }
 
