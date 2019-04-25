@@ -24,6 +24,9 @@ export class SignalRService {
   private questionSubject = new BehaviorSubject<any>(null);
   public question$ = this.questionSubject.asObservable();
 
+  private answerSubject = new BehaviorSubject<any>(null);
+  public answer$ = this.answerSubject.asObservable();
+
   /* CONNECTION */
 
   private hubConnection: signalR.HubConnection;
@@ -71,7 +74,7 @@ export class SignalRService {
   public addAnswerListener = () => {
     this.checkConnection();
     this.hubConnection.on('broadcastAnswer', (data) => {
-      this.questionSubject.next(data);
+      this.answerSubject.next(data);
     });
   }
 

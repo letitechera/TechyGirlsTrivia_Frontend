@@ -1,8 +1,6 @@
 import { Component, OnInit, NgZone } from '@angular/core';
-import { ParticipantModel } from '@models/participant';
 import { SignalRService } from '@services/signal-r.service';
 import { Router } from '@angular/router';
-import { CDK_CONNECTED_OVERLAY_SCROLL_STRATEGY } from '@angular/cdk/overlay/typings/overlay-directives';
 import { timer } from 'rxjs/internal/observable/timer';
 
 @Component({
@@ -30,7 +28,7 @@ export class WaitingComponent implements OnInit {
           if (this.timer === -1) {
             subscribe.unsubscribe();
             this.zone.run(() => {
-              this.router.navigate(['screen/question/', 1]);
+              this.router.navigateByUrl('screen/question');
             });
           }
         });

@@ -23,7 +23,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
   public sumbitted: boolean;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     public signalRService: SignalRService,
     public storageService: StorageService,
@@ -31,12 +30,25 @@ export class QuestionComponent implements OnInit, OnDestroy {
     private zone: NgZone,
     private dialog: MatDialog
   ) {
-    this.signalRService.addAnswerListener();
-    this.route.params.subscribe(params => {
-      this.questionId = +params.id;
-      this.getQuestion(this.questionId);
+    this.signalRService.addQuestionsListener();
+    this.signalRService.question$.subscribe(question => {
+        if (question === null) {
+          this.zone.run(() => {
+            this.router.navigateByUrl('final');
+          });
+        }
+        this.dialog.closeAll();
+        this.question = question;
+        this.sumbitted = false;
+        this.timer = 20;
+        const source = timer(1000, 1000);
+        this.subscribe = source.subscribe(val => {
+          this.timer--;
+          if (this.timer === -1) {
+            this.subscribe.unsubscribe();
+          }
+        });
     });
-    this.sumbitted = false;
   }
 
   ngOnInit() {
@@ -45,39 +57,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscribe.unsubscribe();
-  }
-
-  public getQuestion(questionId) {
-    this.sumbitted = false;
-    const headers = this.signalRService.getHeaders();
-    const url = `${environment.webApiUrl}/api/game/question/${questionId}`;
-    return this.http.get(url, { headers })
-      .subscribe((data: any) => {
-        if (data != null) {
-          this.question = data;
-
-          const source = timer(1000, 1000);
-          this.subscribe = source.subscribe(val => {
-            this.timer--;
-            if (this.timer === -1) {
-              questionId++;
-              this.subscribe.unsubscribe();
-              this.zone.run(() => {
-                this.timer = 20;
-                this.dialog.closeAll();
-                if (questionId === 20) {
-                  this.router.navigateByUrl('final');
-                } else {
-                  this.router.navigate(['question/', questionId]);
-                }
-              });
-            }
-          });
-        }
-      },
-        (err) => {
-          console.log(err);
-        });
   }
 
   public submitAnswer(answerId) {
@@ -93,7 +72,6 @@ export class QuestionComponent implements OnInit, OnDestroy {
       points = -1;
     }
     const total = this.storageService.getScore(points);
-
     const time = this.storageService.getTime(this.timer);
 
     const answer = {

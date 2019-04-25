@@ -11,21 +11,21 @@ import { AdminComponent } from '@pages/private/admin/admin.component';
 import { QuestionComponent } from '@pages/mobile/question/question.component';
 
 export const ROUTES: Routes = [
-  /* MOBILE */ 
+  /* MOBILE */
     { path: '',   redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'waiting', component: WaitingRoomComponent },
-    { path: 'question/:id', component: QuestionComponent },
+    { path: 'question', component: QuestionComponent },
     { path: 'final', component: FinalResultsComponent },
     { path: 'timer', component: TimerComponent },
 
   /* SCREEN */
     { path: 'screen/welcome', component: WelcomeComponent },
     { path: 'screen/waiting', component: WaitingComponent },
-    { path: 'screen/question/:id', component: PublicQuestionComponent },
+    { path: 'screen/question', component: PublicQuestionComponent },
     { path: 'screen/podium', component: PodiumComponent },
 
   /* SCREEN */
-    { path: 'private/admin', component: AdminComponent },
+    { path: 'admin', component: AdminComponent },
 
   ];
