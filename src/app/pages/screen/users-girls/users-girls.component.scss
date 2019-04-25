@@ -8,7 +8,6 @@
   justify-content: center;
   flex-wrap: wrap;
 
-
   .people-container {
     width: 160px;
     height: 160px;
@@ -27,9 +26,7 @@
     }
 
     .girl-name-container {
-      font-family: NunitoSans;
       font-size: 24px;
-      font-weight: bold;
       text-align: center;
       color: $simple-white;
       line-height: 1.33;

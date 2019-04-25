@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
   public userImage: string;
   public formData: FormData;
   private baseurl = `${environment.webApiUrl}/api/game/uploadimage`;
+  public participantsList: any[];
+
 
   constructor(
     public signalRService: SignalRService,
@@ -34,7 +36,7 @@ export class HomeComponent implements OnInit {
     private storageService: StorageService,
     private http: HttpClient,
     private zone: NgZone
-  ) { 
+  ) {
     this.signalRService.startConnection();
     this.signalRService.addRegisterListener();
     this.signalRService.addStartGameListener();
@@ -52,6 +54,9 @@ export class HomeComponent implements OnInit {
       Time: 0
     };
     this.initForm();
+    this.signalRService.participants$.subscribe(participants => {
+      this.participantsList = participants;
+    });
   }
 
   private initForm() {
@@ -63,6 +68,7 @@ export class HomeComponent implements OnInit {
   }
 
   public submitSession() {
+    this.duplicateError = false;
     this.submitted = true;
     if (!this.sessionForm.valid) {
       return;
@@ -73,23 +79,17 @@ export class HomeComponent implements OnInit {
 
   private register() {
     this.setUserObject();
-    const headers = this.signalRService.getHeaders();
-    const url = `${environment.webApiUrl}/api/game/register`;
-    return this.http.post(url, this.userData, { headers })
-      .subscribe((participant: ParticipantModel) => {
-        this.loading = false;
-        if (participant == null) {
+    if(this.participantsList){
+      this.participantsList.forEach(element => {
+        if(element.participantName === this.userData.ParticipantName){
           this.duplicateError = true;
-        } else {
-          this.storageService.setUserLocalVariables(participant);
-          this.zone.run(() => this.router.navigateByUrl('waiting'));
+          return;
         }
-      },
-        (err) => {
-          console.log(err);
-          this.error = true;
-          this.loading = false;
-        });
+      });
+    }
+    this.signalRService.broadcastRegister(this.userData);
+    this.storageService.setUserLocalVariables(this.userData);
+    this.zone.run(() => this.router.navigateByUrl('waiting'));
   }
 
   private setUserObject() {
@@ -136,7 +136,6 @@ export class HomeComponent implements OnInit {
         } else if (event.type === HttpEventType.Response) {
           const body = event.body as any;
           this.userImage = body.newFile;
-          console.log(this.userImage);
           this.loadingfile = false;
         }
       },

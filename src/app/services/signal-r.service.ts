@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { QuestionModel } from '../models/question';
 import { environment } from '@environment';
 import { ParticipantModel } from '@models/participant';
 import { BehaviorSubject } from 'rxjs';
@@ -27,6 +26,9 @@ export class SignalRService {
   private answerSubject = new BehaviorSubject<any>(null);
   public answer$ = this.answerSubject.asObservable();
 
+  private winnersSubject = new BehaviorSubject<any[]>(null);
+  public winners$ = this.winnersSubject.asObservable();
+
   /* CONNECTION */
 
   private hubConnection: signalR.HubConnection;
@@ -43,13 +45,6 @@ export class SignalRService {
 
   /* LISTENERS */
 
-  public addGetTimerListener = () => {
-    this.checkConnection();
-    this.hubConnection.on('getTimer', (data) => {
-      // this.data = data;
-    });
-  }
-
   public addRegisterListener = () => {
     this.checkConnection();
     this.hubConnection.on('registerUser', (data) => {
@@ -59,7 +54,7 @@ export class SignalRService {
 
   public addStartGameListener = () => {
     this.checkConnection();
-    this.hubConnection.on('broadcastStart', (data) => {
+    this.hubConnection.on('startGame', (data) => {
       this.startGameSubject.next(data);
     });
   }
@@ -71,22 +66,39 @@ export class SignalRService {
     });
   }
 
-  public addAnswerListener = () => {
+  public addAnswersListener = () => {
     this.checkConnection();
     this.hubConnection.on('broadcastAnswer', (data) => {
       this.answerSubject.next(data);
     });
   }
 
+  public addResultsListener = () => {
+    this.checkConnection();
+    this.hubConnection.on('finalResults', (data) => {
+      this.winnersSubject.next(data);
+    });
+  }
+
   /* BROADCASTERS */
 
+  public broadcastRegister = (user) => {
+    this.hubConnection.invoke('registerUser', user)
+      .catch(err => console.error(err));
+  }
+
   public broadcastStartGame = (start) => {
-    this.hubConnection.invoke('broadcastStart', start)
+    this.hubConnection.invoke('startGame', start)
       .catch(err => console.error(err));
   }
 
   public broadcastAnswer = (answer) => {
-    this.hubConnection.invoke('BroadcastAnswer', answer)
+    this.hubConnection.invoke('setAnswer', answer)
+      .catch(err => console.error(err));
+  }
+
+  public broadcastFinalResults = (gameId) => {
+    this.hubConnection.invoke('finalResults', gameId)
       .catch(err => console.error(err));
   }
 
