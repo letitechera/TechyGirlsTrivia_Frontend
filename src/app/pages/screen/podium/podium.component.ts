@@ -14,9 +14,10 @@ export class PodiumComponent implements OnInit {
   constructor(
     public signalRService: SignalRService,
     public storageService: StorageService,
-  ) { 
+  ) {
     const gameid = this.storageService.getGameId();
     this.signalRService.broadcastFinalResults(gameid);
+    this.signalRService.addResultsListener();
     this.signalRService.winners$.subscribe(winners => {
       if (winners && winners.length > 0) {
         this.winners = winners;

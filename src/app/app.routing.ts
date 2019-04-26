@@ -20,7 +20,7 @@ export const ROUTES: Routes = [
     { path: 'timer', component: TimerComponent },
 
   /* SCREEN */
-    { path: 'screen/welcome', component: WelcomeComponent },
+    { path: 'screen', component: WelcomeComponent },
     { path: 'screen/waiting', component: WaitingComponent },
     { path: 'screen/question', component: PublicQuestionComponent },
     { path: 'screen/podium', component: PodiumComponent },

@@ -19,20 +19,19 @@ export class FinalResultsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.signalRService.participants$.subscribe(participants => {
-      if (participants && participants.length > 0) {
-        this.participants = participants;
-        this.participants.forEach(element => {
-          if (element.participantId === this.storageService.getUserId()) {
-            this.current = element;
-          }
-        });
-        const sorted = this.participants.sort((a, b) => a.title.rendered.localeCompare(b.score));
-        this.place = sorted.indexOf(this.current);
-        console.log(sorted);
-        console.log(this.place);
-      }
-    });
+    // const gameid = this.storageService.getGameId();
+    // this.signalRService.broadcastGetAllUsers(gameid);
+    // this.signalRService.addGetAllUsersListener();
+    // this.signalRService.allUsers$.subscribe(users => {
+    //   if (users && users.length > 0) {
+    //     this.participants = users;
+    //     this.participants.forEach(element => {
+    //       if (element.participantId === this.storageService.getUserId()) {
+    //         this.current = element;
+    //       }
+    //     });
+    //   }
+    // });
   }
 
 }

@@ -3,8 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  // webApiUrl: 'http://localhost:60967', //leti - onetree
-  webApiUrl: 'http://localhost:64328', //leti - casa
+  webApiUrl: 'http://localhost:60967', //leti - onetree
+  // webApiUrl: 'http://localhost:64328', //leti - casa
   // webApiUrl: 'http://localhost:65459', //lu
   // webApiUrl: 'https://trivia-ot.azurewebsites.net', //prod
   uploadUserImage: 'https://triviadata.blob.core.windows.net/userimages/default-hover.png',

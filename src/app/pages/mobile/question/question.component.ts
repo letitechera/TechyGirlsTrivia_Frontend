@@ -14,12 +14,10 @@ import { WaitingModalComponent } from './waiting-modal/waiting-modal.component';
   templateUrl: './question.component.html',
   styleUrls: ['./question.component.scss']
 })
-export class QuestionComponent implements OnInit, OnDestroy {
+export class QuestionComponent implements OnInit {
 
-  public timer = 20;
   public questionId: number;
   public question: any;
-  public subscribe: Subscription;
   public sumbitted: boolean;
 
   constructor(
@@ -32,31 +30,23 @@ export class QuestionComponent implements OnInit, OnDestroy {
   ) {
     this.signalRService.addQuestionsListener();
     this.signalRService.question$.subscribe(question => {
-        if (question === null) {
-          this.zone.run(() => {
-            this.router.navigateByUrl('final');
-          });
-        }
-        this.dialog.closeAll();
-        this.question = question;
-        this.sumbitted = false;
-        this.timer = 20;
-        const source = timer(1000, 1000);
-        this.subscribe = source.subscribe(val => {
-          this.timer--;
-          if (this.timer === -1) {
-            this.subscribe.unsubscribe();
-          }
+      this.dialog.closeAll();
+      console.log(question);
+      if (!question) {
+        return;
+      }
+      if (question && question.questionId === 0) {
+        this.zone.run(() => {
+          this.router.navigateByUrl('final');
         });
+      }
+      this.question = question;
+      this.sumbitted = false;
     });
   }
 
   ngOnInit() {
     this.sumbitted = false;
-  }
-
-  ngOnDestroy(): void {
-    this.subscribe.unsubscribe();
   }
 
   public submitAnswer(answerId) {
@@ -72,13 +62,12 @@ export class QuestionComponent implements OnInit, OnDestroy {
       points = -1;
     }
     const total = this.storageService.getScore(points);
-    const time = this.storageService.getTime(this.timer);
 
     const answer = {
       QuestionId: this.questionId,
       AnswerId: answerId,
       ParticipantId: this.storageService.getUserId(),
-      Time: time,
+      Time: 0,
       Score: total,
       GameId: this.storageService.getGameId()
     };
@@ -93,6 +82,14 @@ export class QuestionComponent implements OnInit, OnDestroy {
       hasBackdrop: true,
       disableClose: true
     });
+  }
+
+  private getQuestions() {
+    this.http.get(`${environment.webApiUrl}/api/game/getQuestion`)
+      .subscribe(question => {
+      },
+        (err) => {
+        });
   }
 
   public isCorrect(answerId) {

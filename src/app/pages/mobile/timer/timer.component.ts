@@ -22,7 +22,7 @@ export class TimerComponent implements OnInit {
       if (this.value === -1) {
         subscribe.unsubscribe();
         this.zone.run(() => {
-          this.router.navigate(['question/', 1]);
+          this.router.navigateByUrl('question');
         });
       }
     });

@@ -1,13 +1,16 @@
-<div class="screen-public-container">
-  <div class="screen-top-container">
+<span *ngIf="!question || question.questionId == 0">
+  <div class="loader"></div>
+</span>
+<div class="screen-public-container" *ngIf="question && question.questionId > 0">
+  <!-- <div class="screen-top-container">
     <img src="/assets/group-3.png" class="screen-img-top" />
     <div class="screen-timer-question">
       <span class="time-resposive">{{timer}}</span>
     </div>
-  </div>
+  </div> -->
   <!--Title Question-->
   <div class="screen-title-question">
-    <img src="/assets/calendar@2x.png" class="img-title-question" />
+    <img src="{{question.category.categoryLogo}}" class="img-title-question" />
     <h1 class="screen-name-title">{{question.category.categoryName}}</h1>
   </div>
   <!--The Question-->

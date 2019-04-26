@@ -1,17 +1,17 @@
-<span *ngIf="!question">
+<span *ngIf="!question || question.questionId == 0">
   <div class="loader"></div>
 </span>
 <!--Timer-->
-<div class="timer-container-top">
+<!-- <div class="timer-container-top">
   <div class="timer-question-container">
     <span class="numbers-timer-question">{{timer}}</span>
   </div>
-</div>
-<div *ngIf="question">
+</div> -->
+<div *ngIf="question && question.questionId > 0">
   <!--Img of Question-->
   <div class="second-container-logo">
     <div class="container-logo-questions">
-      <img src="/assets/calendar.png" />
+      <img src="{{question.category.categoryLogo}}" />
     </div>
   </div>
   <!--Type of Question-->

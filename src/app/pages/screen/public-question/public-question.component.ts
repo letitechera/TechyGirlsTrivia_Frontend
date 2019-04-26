@@ -11,12 +11,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './public-question.component.html',
   styleUrls: ['./public-question.component.scss']
 })
-export class PublicQuestionComponent implements OnInit, OnDestroy {
+export class PublicQuestionComponent implements OnInit {
 
-  public timer = 20;
   public questionId: number;
   public question: any;
-  public subscribe: Subscription;
 
   constructor(
     private router: Router,
@@ -26,27 +24,18 @@ export class PublicQuestionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.signalRService.addQuestionsListener();
-    // this.signalRService.addAnswerListener();
 
     this.signalRService.question$.subscribe(question => {
-        this.question = question;
-        const source = timer(1000, 1000);
-        this.subscribe = source.subscribe(val => {
-          this.timer--;
-          if (this.timer === -1) {
-            this.subscribe.unsubscribe();
-            this.zone.run(() => {
-              this.timer = 20;
-              if (question === null) {
-                this.router.navigateByUrl('podium');
-              }
-            });
-          }
+      console.log(question);
+      if (!question) {
+        return;
+      }
+      if (question && question.questionId === 0) {
+        this.zone.run(() => {
+          this.router.navigateByUrl('screen/podium');
         });
+      }
+      this.question = question;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscribe.unsubscribe();
   }
 }
